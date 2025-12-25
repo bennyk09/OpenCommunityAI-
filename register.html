@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register • OpenCommunityAI</title>
+
+  <!-- Fonts -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Poppins:900i" />
+
+  <!-- Page styles -->
+  <link rel="stylesheet" href="css/register.css" />
+</head>
+<body>
+
+  <div class="reg-wrapper">
+    <div class="reg-card">
+      <h1 class="reg-title">Join the Community</h1>
+      <p class="reg-subtitle">Create your account to start building with OpenCommunityAI.</p>
+
+      <form id="registerForm">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required minlength="3" />
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="password-wrapper">
+            <input type="password"
+                   id="password"
+                   name="password"
+                   required
+                   minlength="8" />
+            <button type="button"
+                    id="togglePassword"
+                    class="toggle-password"
+                    aria-label="Show password"
+                    aria-pressed="false">
+              👁
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="reg-btn">Register</button>
+      </form>
+
+      <p id="regMessage" class="reg-message"></p>
+    </div>
+  </div>
+
+  <!-- Firebase + Auth + logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      sendEmailVerification
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyD0_yrzJJ7GwplSrzupl5GIGSzN6oUBnM8",
+      authDomain: "opencommunityai.firebaseapp.com",
+      projectId: "opencommunityai",
+      storageBucket: "opencommunityai.firebasestorage.app",
+      messagingSenderId: "487201283474",
+      appId: "1:487201283474:web:d5073fbedb9887f74d354b",
+      measurementId: "G-5LG8E9WJ25"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+
+    const form = document.getElementById("registerForm");
+    const msg = document.getElementById("regMessage");
+    const pwdInput = document.getElementById("password");
+    const toggleBtn = document.getElementById("togglePassword");
+
+    // Show / hide password toggle
+    toggleBtn.addEventListener("click", () => {
+      const isHidden = pwdInput.type === "password";
+      pwdInput.type = isHidden ? "text" : "password";
+      toggleBtn.setAttribute("aria-pressed", String(isHidden));
+      toggleBtn.textContent = isHidden ? "🙈" : "👁";
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.textContent = "";
+      msg.classList.remove("error", "success");
+
+      const name = form.name.value.trim();
+      const username = form.username.value.trim();
+      const email = form.email.value.trim();
+      const password = form.password.value;
+
+      // basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(email)) {
+        msg.textContent = "Please enter a valid email address.";
+        msg.classList.add("error");
+        return;
+      }
+
+      if (password.length < 8) {
+        msg.textContent = "Password must be at least 8 characters.";
+        msg.classList.add("error");
+        return;
+      }
+
+      try {
+        // Create user in Firebase Auth
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        // Configure where the verification link should send the user AFTER click
+        const actionCodeSettings = {
+          url: window.location.origin + "dashboard.html",
+          handleCodeInApp: false
+        }; // uses continueUrl under the hood[web:403][web:399]
+
+        // Send verification email with redirect
+        await sendEmailVerification(userCredential.user, actionCodeSettings);
+
+        console.log("User created:", userCredential.user);
+
+        msg.textContent =
+          "Registration successful! A verification link was sent to your email. Click it to verify and go to your dashboard.";
+        msg.classList.add("success");
+
+        form.reset();
+        pwdInput.type = "password";
+        toggleBtn.setAttribute("aria-pressed", "false");
+        toggleBtn.textContent = "👁";
+
+        // Optional: stay here or go to a 'check your email' info page
+        // window.location.href = "verification.html";
+      } catch (error) {
+        console.error(error);
+        msg.textContent = error.message || "Registration failed. Please try again.";
+        msg.classList.add("error");
+      }
+    });
+  </script>
+</body>
+</html>

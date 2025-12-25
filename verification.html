@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email verification • OpenCommunityAI</title>
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" />
+  <link rel="stylesheet" href="css/verification.css" />
+</head>
+<body>
+  <div class="verify-wrapper">
+    <div class="verify-card">
+      <h1 class="verify-title">Check your email</h1>
+      <p class="verify-text">
+        A verification link has been sent to your email address.
+        Click that link to verify and activate your account.
+      </p>
+      <p class="verify-text small">
+        If you do not see the email, check your spam folder or try resending it.
+      </p>
+
+      <button id="resendBtn" class="verify-btn">Resend verification email</button>
+      <p id="verifyMsg" class="verify-msg"></p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, sendEmailVerification } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD0_yrzJJ7GwplSrzupl5GIGSzN6oUBnM8",
+      authDomain: "opencommunityai.firebaseapp.com",
+      projectId: "opencommunityai",
+      storageBucket: "opencommunityai.firebasestorage.app",
+      messagingSenderId: "487201283474",
+      appId: "1:487201283474:web:d5073fbedb9887f74d354b",
+      measurementId: "G-5LG8E9WJ25"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const resendBtn = document.getElementById("resendBtn");
+    const verifyMsg = document.getElementById("verifyMsg");
+
+    resendBtn.addEventListener("click", async () => {
+      verifyMsg.textContent = "";
+      verifyMsg.className = "verify-msg";
+
+      const user = auth.currentUser;
+      if (!user) {
+        verifyMsg.textContent = "You must be logged in to resend the email.";
+        verifyMsg.classList.add("error");
+        return;
+      }
+
+      try {
+        await sendEmailVerification(user);
+        verifyMsg.textContent = "Verification email resent. Check your inbox.";
+        verifyMsg.classList.add("success");
+      } catch (err) {
+        console.error(err);
+        verifyMsg.textContent = "Could not resend email. Please try again later.";
+        verifyMsg.classList.add("error");
+      }
+    });
+  </script>
+</body>
+</html>
