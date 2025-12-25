@@ -1,55 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="fonts.css">
-    <title>OpenCommunityAI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/styles2.css">
+  <title>OpenCommunityAI</title>
+
+  <!-- Jersey 15 for hero, Poppins for CTA -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Poppins:900i" />
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="main-container">
-        <h1>OpenCommunityAI</h1>
-        <h2>A Global Open-source Community for AI-developers</h2>
-        <div class="join-btn">
-        <button class="button">
-  <svg class="svgIcon" viewBox="0 0 384 512">
-    <path
-      d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
-    ></path>
-  </svg>
-</button>
-</div>
-<div class="about">
-  <h1 class="about-heading">About OpenCommunityAI</h1>
 
-  <p class="about-text">
-    OpenCommunityAI is a global, open-source community dedicated to uniting AI developers,
-    researchers, and innovators to collaboratively build transparent, ethical, and impactful
-    artificial intelligence solutions.
-  </p>
+  <!-- HERO: title + CTA + about + social -->
+  <div class="hero">
+    <div class="hero-left">
+      <h1>OpenCommunityAI</h1>
+      <h2>A Global Open-source Community for AI-developers</h2>
 
-  <p class="about-text">
-    Our mission is to foster an inclusive ecosystem where knowledge is openly shared,
-    ideas are freely exchanged, and cutting-edge AI technologies evolve through collective
-    contribution. We believe open collaboration accelerates innovation and leads to
-    more responsible and trustworthy AI systems.
-  </p>
+      <!-- CTA below title -->
+      <div class="cta-inline">
+        <a class="cta join-btn" href="#">
+          <span>Join the Community</span>
+          <span>
+            <svg width="52px" height="32px" viewBox="0 0 66 43"
+                 xmlns="http://www.w3.org/2000/svg">
+              <g id="arrow" fill="none" fill-rule="evenodd">
+                <path class="one" d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+                <path class="two" d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+                <path class="three" d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z" fill="#FFFFFF"></path>
+              </g>
+            </svg>
+          </span>
+        </a>
+      </div>
 
-  <p class="about-text">
-    At OpenCommunityAI, members work on real-world projects, contribute to open-source
-    repositories, participate in technical discussions, and learn from a diverse,
-    global network of developers. From research and experimentation to deployment and
-    scalability, we support the complete AI development lifecycle.
-  </p>
+      <div class="about">
+        <h1 class="about-heading">About OpenCommunityAI</h1>
 
-  <p class="about-text">
-    By building together, we aim to create AI technologies that are accessible,
-    community-driven, and designed to positively impact society.
-  </p>
-</div>
+        <p class="about-text">
+          OpenCommunityAI is a global, open-source community dedicated to uniting AI developers,
+          researchers, and innovators to collaboratively build transparent, ethical, and impactful
+          artificial intelligence solutions.
+        </p>
 
+        <p class="about-text">
+          Our mission is to foster an inclusive ecosystem where knowledge is openly shared,
+          ideas are freely exchanged, and cutting-edge AI technologies evolve through collective
+          contribution. We believe open collaboration accelerates innovation and leads to
+          more responsible and trustworthy AI systems.
+        </p>
+
+        <p class="about-text">
+          At OpenCommunityAI, members work on real-world projects, contribute to open-source
+          repositories, participate in technical discussions, and learn from a diverse,
+          global network of developers.
+        </p>
+
+        <p class="about-text">
+          By building together, we aim to create AI technologies that are accessible,
+          community-driven, and designed to positively impact society.
+        </p>
+      </div>
     </div>
-</body>
 
+    <div class="hero-right">
+      <h3 class="social-heading">Connect with us</h3>
+
+      <div class="social-links">
+        <!-- Instagram pixel icon -->
+        <a href="https://www.instagram.com/opencommunityai/"
+           target="_blank"
+           aria-label="Instagram"
+           class="social-link">
+          <div class="pixel-icon ig-icon">
+            <div class="px p1"></div>
+            <div class="px p2"></div>
+            <div class="px p3"></div>
+            <div class="px p4"></div>
+            <div class="px p5"></div>
+            <div class="px p6"></div>
+            <div class="px p7"></div>
+            <div class="px p8"></div>
+            <div class="px p9"></div>
+          </div>
+        </a>
+
+        <!-- GitHub pixel icon -->
+        <a href="https://github.com/dashboard"
+           target="_blank"
+           aria-label="GitHub"
+           class="social-link">
+          <div class="pixel-icon gh-icon">
+            <div class="px p1"></div>
+            <div class="px p2"></div>
+            <div class="px p3"></div>
+            <div class="px p4"></div>
+            <div class="px p5"></div>
+            <div class="px p6"></div>
+            <div class="px p7"></div>
+            <div class="px p8"></div>
+            <div class="px p9"></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</body>
 </html>
